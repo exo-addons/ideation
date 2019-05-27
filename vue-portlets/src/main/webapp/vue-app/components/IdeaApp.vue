@@ -1,18 +1,20 @@
 <template>
- 
   <div id="IdeaApp">
-        <app-nav-main></app-nav-main>
-        <router-view />
-        <h1>changeed</h1>
-    </div>
+    <tabs />
+    <router-view />
+  </div>
 </template>
 
 
  <script>
 
-export default {
- 
-  }
+     import tabs from './tabs.vue';
+     export default {
+         components: {
+             tabs
+         },
+
+
+     }
   </script>
-  <style ></style>
    
