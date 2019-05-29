@@ -121,7 +121,7 @@
                           >Visiter le projet</a>
 
                           <button
-                            v-if="(userNameConnected===d.user && d.isProject!==false)"
+                            v-if="(userNameConnected === d.user && d.isProject)"
                             class="btn btn-small btn-primary"
                             type="button"
                             :disabled="disable"
