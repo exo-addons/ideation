@@ -146,6 +146,7 @@ public class IdeaService {
     space.setVisibility(Space.PRIVATE);
     space = spaceService.createSpace(space, creator);
     idea.setSpaceID(space.getId());
+    idea.setIsProject(true);
     ideaDao.update(ideaMapper.dtoToIdea(idea));
   }
   
