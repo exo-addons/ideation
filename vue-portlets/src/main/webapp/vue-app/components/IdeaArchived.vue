@@ -1,67 +1,90 @@
 <template>
-    <div class="team">
-        <div class="alert alert-success" v-if="alt">
-            <i class="uiIconSuccess"></i>Aucun Idée Archivée
-        </div>
-        <v-container >
-            <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 v-for="idea in ideas" :key="idea.id">
-                    <v-card flat class="text-xs-left ma-3">
-                        <v-card-text>
-                            <div class="subheading" >
-                                <spacer></spacer>
-                                <i class="far fa-address-card" color="blue"></i>
-                                Titre :{{ idea.title }}
-                            </div>
-                            <div class="grey--text">
-                                <i class="fas fa-user-graduate"></i>
-                                Crée par :{{ idea.user }}
-                            </div>
-                            <div class="grey--text">
-                                <i class="fas fa-calendar"></i>
-                                le :{{ idea.createdTime}}
-                            </div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <router-link :to="`/ideainfo/${idea.id}`"><i class="fas fa-angle-double-right"></i> </router-link>
-
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-container>
+  <div class="crd">
+    <div v-if="alt" class="alert alert-info">
+      <i class="uiIconInfo"></i>Aucun Idée Archivée
     </div>
+    <div
+      v-if="compont"
+      id="UIActivitiesContainer_welcomeActivity"
+      class="UIActivitiesContainer_welcomeActivity"
+    >
+      <div id="welcomeActivity" class="activityStream uiDefaultActivity">
+        <div class="activityTimeLine pull-left"></div>
+        <!--end activityTimeLine-->
+
+        <div id="boxContainer" class="boxContainer">
+          <div id="ContextBoxWelcomeActivity" class="uiBox contentBox">
+            <div id="ActivityContextBoxWelcomeActivity">
+              <!--end heading-->
+              <div class="heading">
+                <v-expansion-panel>
+                  <v-expansion-panel-content v-for="d in ideas" :key="d.id">
+                    <div slot="header" class="py-1">
+                      <strong>Titre :</strong>
+                      {{ d.title }}
+                      <div class="dataInfor">
+                        <span class="dateTime">
+                          <i class="uiIconClock uiIconLightGray"></i>
+                          &nbsp;le {{ d.createdTime }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <v-card>
+                      <v-card-text class="px-4 grey--text" style="    width: 95%">
+                        <div>
+                          <strong>Resumé :</strong>
+                          {{ d.resume }}
+                        </div>
+                        <br>
+                        <p>
+                          <router-link :to="`/ideainfo/${d.id}`">Lire la suite ...</router-link>
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </div>
+              <!-- Welcome content -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
-    export default {
-        data() {
-            return {
-                alt:false,
-                ideas: []
-            }
-        },mounted(){
-            axios
-                .get('/portal/rest/idea/all/ARCHIVED')
-                .then(response => { this.ideas=response.data;
-                    if(this.ideas.length===0){
-                        this.alt=true;
-                    }
-
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.errored = true
-                })
+export default {
+  data() {
+    return {
+      alt: false,
+      ideas: [],
+      compont: true,
+    };
+  },
+  mounted() {
+    axios
+      .get('/portal/rest/idea/all/ARCHIVED')
+      .then((response) => {
+        this.ideas = response.data;
+        if (this.ideas.length === 0) {
+          this.alt = true;
+          this.compont = false;
         }
-    }
+      })
+      .catch((error) => {
+        this.errored = true;
+      });
+  },
+};
 </script>
 <style>
-
-    .cardstyle{
-        margin-left: 20%;
-    }
+.crd {
+  width: 80%;
+  margin-left: 9%;
+}
 </style>
 
 
