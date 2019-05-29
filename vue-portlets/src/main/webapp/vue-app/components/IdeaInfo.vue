@@ -20,7 +20,7 @@
               <div class="heading">
                 <span class="arrowLeft"></span>
                 <div class="author">
-                  <a title="welcome to Ideation">Cette Idée est Céer par {{ this.donnesidea.user }}</a>
+                  <a title="welcome to Ideation">Cette Idée est Créée par {{ this.donnesidea.user }}</a>
                 </div>
                 <div class="dataInfor">
                   <span class="dateTime">
@@ -201,8 +201,6 @@ export default {
         });
       }
     });
-  },
-  updated() {
     this.verifyRating();
     axios
       .get(`/portal/rest/rating/getratingbyidea/${this.$route.params.id}/DISLIKE`)
