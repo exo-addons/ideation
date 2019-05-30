@@ -196,7 +196,7 @@ export default {
         });
     },
     UpdateIdea: function(id, title, description, resume, explanation) {
-      this.datajson.status = 'DRAFET';
+      this.datajson.status = 'DRAFT';
       this.datajson.description = description;
       this.datajson.title = title;
       this.datajson.id = id;
