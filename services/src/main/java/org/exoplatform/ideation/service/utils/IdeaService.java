@@ -1,10 +1,14 @@
 package org.exoplatform.ideation.service.utils;
 
+import org.exoplatform.commons.api.notification.NotificationContext;
+import org.exoplatform.commons.api.notification.model.PluginKey;
 import org.exoplatform.commons.api.persistence.ExoTransactional;
+import org.exoplatform.commons.notification.impl.NotificationContextImpl;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.dao.IdeaImpDAO;
 import org.exoplatform.ideation.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.IdeaEntity;
+import org.exoplatform.ideation.integration.notification.AddIdeaPlugin;
 import org.exoplatform.ideation.service.Mapper.IdeaMapper;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -79,11 +83,14 @@ public class IdeaService {
     IdeaEntity ideaEntity = null;
     try {
       ideaEntity = ideaDao.create(ideaMapper.dtoToIdea(ideaDTO));
+      
+      // Send Notification
+      NotificationContext ctx = NotificationContextImpl.cloneInstance().append(AddIdeaPlugin.IDEA, ideaDTO);
+      ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(AddIdeaPlugin.ID))).execute(ctx);
     } catch (Exception e) {
       LOG.error("Error to create badge with title ", ideaDTO.getUser(), e);
     }
     return ideaMapper.ideaTOideaDTO(ideaEntity);
-
   }
 
   @ExoTransactional

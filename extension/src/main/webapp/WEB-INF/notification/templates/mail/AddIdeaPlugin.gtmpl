@@ -36,7 +36,7 @@
 <p style="margin: 0 0 10px; color: #333333; font-size: 13px; line-height: 18px;">
 <%
 String profileUrl = "<a style=\"text-decoration: none; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif\" href=\""+ PROFILE_URL + "\"><strong>" + USER + "</strong></a>";
-String creator = "<span style=\"text-decoration: none; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif\"><strong>" + CREATOR + "</strong></span>";
+String creator = "<span style=\"text-decoration: none; color: #2f5e92; font-family: 'HelveticaNeue Bold', Helvetica, Arial, sans-serif\"><strong>" + IDEA_CREATOR + "</strong></span>";
 def msg = _ctx.appRes("Notification.message.AddIdeaPlugin");
 def description = _ctx.appRes("Notification.description.email.AddIdeaPlugin",profileUrl, IDEA_TITLE);
 %>
