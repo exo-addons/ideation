@@ -100,6 +100,7 @@ public class IdeaRestService implements ResourceContainer {
   @Path("addIdea")
   public Response addIdea(IdeaDTO ideaDTO) {
     try {
+      ideaDTO.setUser(getCurrentUser());
       ideaDTO = ideaService.addIdea(ideaDTO);
       return Response.ok().entity(ideaDTO).build();
     } catch (Exception e) {

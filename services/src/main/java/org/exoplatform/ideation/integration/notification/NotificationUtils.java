@@ -8,4 +8,6 @@ package org.exoplatform.ideation.integration.notification;
  */
 
 public class NotificationUtils {
+  public static final String IDEA_TITLE = "IDEA_TITLE";
+  public static final String IDEA_CREATOR = "IDEA_CREATOR";
 }
